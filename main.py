@@ -113,9 +113,11 @@ class Demo2:
                     print("El numero se queda en bajo")
 
             if estado_actual == "alto":
+                canvas.create_text(alto_bit_x1 + bit_actual*diferencial + 40,alto_bit_y1 - 30, fill="darkblue", font="Times 20 italic bold",text= "1")
                 canvas.create_line(alto_bit_x1 + bit_actual*diferencial, alto_bit_y1, alto_bit_x2+ bit_actual*diferencial, alto_bit_y2, fill="red")
                 bit_actual = bit_actual + 1
             if estado_actual == "bajo":
+                canvas.create_text(bajo_bit_x1 + bit_actual * diferencial + 40, bajo_bit_y1 + 30, fill="darkblue",font="Times 20 italic bold", text="0")
                 canvas.create_line(bajo_bit_x1 + bit_actual*diferencial, bajo_bit_y1, bajo_bit_x2 + bit_actual*diferencial, bajo_bit_y2, fill="red")
                 bit_actual = bit_actual + 1
 
