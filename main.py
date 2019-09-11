@@ -40,7 +40,8 @@ class Demo1:
 
 class Demo2:
     def __init__(self, master):
-        self.master = master
+        self.master = master.geometry("900x500+300+100")
+
         self.frame = tk.Frame(self.master)
         self.quitButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
         self.quitButton.pack()
