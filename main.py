@@ -1,8 +1,13 @@
 
 import tkinter as tk
+from tkinter import messagebox
 
-
-
+def is_hex(s):
+    try:
+        int(s, 16)
+        return True
+    except ValueError:
+        return False
 
 class Demo1:
     def __init__(self, master):
@@ -13,17 +18,25 @@ class Demo1:
         self.texto = tk.Label(master, text="Digite un numero hexadecimal: ")
         textBox = tk.Text(master, height=2, width=20)
 
-        self.buttonCommit = tk.Button(master, height=1, width=10, text="Convertir",
-                              command=lambda: print(textBox.get("1.0","end-1c")))
+        self.buttonCommit = tk.Button(master, height=1, width=10, text="Convertir", command=lambda: self.validate_input(textBox.get("1.0","end-1c")))
         self.texto.pack()
         textBox.pack()
         self.buttonCommit.pack()
 
         self.frame.pack()
 
+    def validate_input(self, numero):
+        if is_hex(numero) and (len(numero) == 3):
+            self.new_window()
+        else:
+            messagebox.showerror("Error", "Entrada no valida.")
+
+
     def new_window(self):
         self.newWindow = tk.Toplevel(self.master)
         self.app = Demo2(self.newWindow)
+
+
 
 class Demo2:
     def __init__(self, master):
