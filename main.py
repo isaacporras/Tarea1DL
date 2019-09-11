@@ -2,6 +2,12 @@
 import tkinter as tk
 from tkinter import messagebox
 
+def binarizar(decimal):
+    binario = ''
+    while decimal // 2 != 0:
+        binario = str(decimal % 2) + binario
+        decimal = decimal // 2
+    return str(decimal) + binario
 def is_hex(s):
     try:
         int(s, 16)
@@ -27,19 +33,21 @@ class Demo1:
 
     def validate_input(self, numero):
         if is_hex(numero) and (len(numero) == 3):
-            self.new_window()
+            self.new_window(numero)
         else:
             messagebox.showerror("Error", "Entrada no valida.")
 
 
-    def new_window(self):
+    def new_window(self, numero):
         self.newWindow = tk.Toplevel(self.master)
-        self.app = Demo2(self.newWindow)
+        self.app = Demo2(self.newWindow,int(numero, 16))
 
 
 
 class Demo2:
-    def __init__(self, master):
+    def __init__(self, master, numero):
+        print(numero)
+        print(binarizar(numero))
         self.master = master.geometry("900x500+300+100")
 
         self.frame = tk.Frame(self.master)
