@@ -1,6 +1,8 @@
 
 import tkinter as tk
+from tkinter import Tk, Canvas, Frame, BOTH
 from tkinter import messagebox
+
 
 def binarizar(decimal):
     binario = ''
@@ -48,12 +50,36 @@ class Demo2:
     def __init__(self, master, numero):
         print(numero)
         print(binarizar(numero))
-        self.master = master.geometry("900x500+300+100")
+        self.master = master
+        self.master.geometry("1500x500+10+100")
 
-        self.frame = tk.Frame(self.master)
-        self.quitButton = tk.Button(self.frame, text = 'Quit', width = 25, command = self.close_windows)
-        self.quitButton.pack()
-        self.frame.pack()
+
+
+        canvas = Canvas(self.master)
+        diferencial = 105
+        x = 120
+
+        canvas.create_line(15, 250, 1400, 250)
+        canvas.create_line(15, 30, 15, 450)
+
+        canvas.create_line(x, 100, x, 400, dash=(4, 2))
+        canvas.create_line(x + 1*diferencial, 100, x + 1*diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 2 * diferencial, 100, x + 2 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 3 * diferencial, 100, x + 3 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 4 * diferencial, 100, x + 4 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 5 * diferencial, 100, x + 5 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 6 * diferencial, 100, x + 6 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 7 * diferencial, 100, x + 7 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 8 * diferencial, 100, x + 8 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 9 * diferencial, 100, x + 9 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 10 * diferencial, 100, x + 10 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 11* diferencial, 100, x + 11 * diferencial, 400, dash=(4, 2))
+        canvas.create_line(x + 12 * diferencial, 100, x + 12 * diferencial, 400, dash=(4, 2))
+
+        canvas.pack(fill=BOTH, expand=1)
+
+
+
 
     def close_windows(self):
         self.master.destroy()
