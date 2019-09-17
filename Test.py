@@ -30,6 +30,25 @@ def codigoHamming(cadena):
 
     return resultado
 
+def codigoHammingImpar(cadena):
+    p1 = [cadena[0],cadena[1],cadena[3],cadena[4],cadena[6]]
+    p2 = [cadena[0],cadena[2],cadena[3],cadena[5],cadena[6]]
+    p3 = [cadena[1],cadena[2],cadena[3]]
+    p4 = [cadena[4],cadena[5],cadena[6]]
+
+    palabraDatosSinParidad = ["_","_",cadena[0],"_",cadena[1],cadena[2],cadena[3],"_",cadena[4],cadena[5],cadena[6]]
+
+    fp1=[paridadImpar(p1),"_",cadena[0],"_",cadena[1],"_",cadena[3],"_",cadena[4],"_",cadena[6]]
+    fp2=["_",paridadImpar(p2),cadena[0],"_","_",cadena[2],cadena[3],"_","_",cadena[5],cadena[6]]
+    fp3=["_","_","_",paridadImpar(p3),cadena[1],cadena[2],cadena[3],"_","_","_","_"]
+    fp4=["_","_","_","_","_","_","_",paridadImpar(p4),cadena[4],cadena[5],cadena[6]]
+
+    palabraDatosParidad = [paridadImpar(p1),paridadImpar(p2),cadena[0],paridadImpar(p3),cadena[1],cadena[2],cadena[3],paridadImpar(p3),cadena[4],cadena[5],cadena[6]]
+
+    resultado = [palabraDatosSinParidad,fp1,fp2,fp3,fp4,palabraDatosParidad]
+
+    return resultado
+
 def comprobacion(cadena,pruebaParidad):
     sinParidad = [cadena[2],cadena[4],cadena[5],cadena[6],cadena[8],cadena[9],cadena[10]]
 
@@ -90,6 +109,18 @@ def paridadPar(cadena):
         return "1"
     else:
         return "0"
+
+def paridadImpar(cadena):
+    contador= 0
+
+    for x in cadena:
+        if (x == "1"):
+            contador+=1
+
+    if (contador%2 != 0):
+        return "0"
+    else:
+        return "1"
 
 def ventana1(hilera):
     root = Tk()
@@ -293,6 +324,88 @@ def ventana4():
     frame.pack()
     root.mainloop()
 
+def ventana5(hilera):
+    root = Tk()
+    root.title("Tabla No 1. Calculo de bits de paridad en el codigo Hamming")
+    data = codigoHammingImpar(hilera)
+    for r in range(0, 7):
+        for c in range(0, 12):
+            size = 30
+            if c > 0:
+                size = 10
+            cell = Entry(root, width=size)
+            cell.grid(row=r, column=c)
+            if c == 0 and r == 6:
+                cell.insert(0, "Palabra de datos(con paridad):")
+            if r == 0 and c > 0:
+                if c == 1:
+                    cell.insert(0, "p1")
+                    continue
+                if c == 2:
+                    cell.insert(0, "p2")
+                    continue
+                if c == 3:
+                    cell.insert(0, "d1")
+                    continue
+                if c == 4:
+                    cell.insert(0, "p3")
+                    continue
+                if c == 5:
+                    cell.insert(0, "d2")
+                    continue
+                if c == 6:
+                    cell.insert(0, "d3")
+                    continue
+                if c == 7:
+                    cell.insert(0, "d4")
+                    continue
+                if c == 8:
+                    cell.insert(0, "p4")
+                    continue
+                if c == 9:
+                    cell.insert(0, "d5")
+                    continue
+                if c == 10:
+                    cell.insert(0, "d6")
+                    continue
+                if c == 11:
+                    cell.insert(0, "d7")
+                    continue
+            if c == 0 and r > 1:
+                cell.insert(0, "p" + str(r-1))
+                continue
+            if c == 0 and r == 1:
+                cell.insert(0, "Palabra de datos(sin paridad):")
+                continue
+
+            if r == 1 and c>0:
+                cell.insert(1, data[0][c-1])
+                continue
+
+            if r == 2 and c>0:
+                cell.insert(2, data[1][c-1])
+                continue
+
+            if r == 3 and c>0:
+                cell.insert(3, data[2][c-1])
+                continue
+
+            if r == 4 and c>0:
+                cell.insert(4, data[3][c-1])
+                continue
+
+            if r == 5 and c>0:
+                cell.insert(5, data[4][c-1])
+                continue
+
+            if r == 6 and c>0:
+                cell.insert(6, data[5][c-1])
+                continue
+    completa = "".join(data[5])
+    print(completa)
+    ventana2(completa)
+    root.mainloop()
+
 def paridad_window():
     root = Tk()
     root.title("Codigo Hamming")
@@ -309,7 +422,7 @@ def paridad_window():
 
     label = Label(root, fg="dark green", text= "Seleccione la paridad", font = ("Helvetica",14)).pack()
     root.geometry("500x300+600+300")
-    impar = Button(frame,text="Paridad Impar",command =lambda:{root.quit(),ventana1(get_hilera())
+    impar = Button(frame,text="Paridad Impar",command =lambda:{root.quit(),ventana5(get_hilera())
                                                        }).pack(side=LEFT)
     par = Button(frame,text="Paridad Par",command = lambda:{root.quit(),ventana1(get_hilera())}).pack(side=RIGHT)
 
