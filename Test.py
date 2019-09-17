@@ -2,7 +2,14 @@ from tkinter import *
 
 from tkinter import messagebox
 
+def error(cadena):
+    p4 = int(str(cadena[3]+"0"+"0"+"0"),2)
+    p3 = int(str(cadena[2]+"0"+"0"),2)
+    p2 = int(str(cadena[1]+"0"),2)
+    p1 = int(str(cadena[0]),2)
 
+    result = p4+p3+p2+p1
+    return str(result)
 
 def codigoHamming(cadena):
     p1 = [cadena[0],cadena[1],cadena[3],cadena[4],cadena[6]]
@@ -46,6 +53,31 @@ def aux_comprobacion(result,paridad):
         return ["Error","1"]
     else:
         return ["Correcto","0"]
+
+def comprobacionSimplificada(cadena):
+    sinParidad = [cadena[2],cadena[4],cadena[5],cadena[6],cadena[8],cadena[9],cadena[10]]
+
+    p1 = [sinParidad[0],sinParidad[1],sinParidad[3],sinParidad[4],sinParidad[6]]
+    p2 = [sinParidad[0],sinParidad[2],sinParidad[3],sinParidad[5],sinParidad[6]]
+    p3 = [sinParidad[1],sinParidad[2],sinParidad[3]]
+    p4 = [sinParidad[4],sinParidad[5],sinParidad[6]]
+
+    if aux_comprobacionSimplificada(cadena[0],p1)== "Error":
+        return "Error"
+    if aux_comprobacionSimplificada(cadena[1],p2)== "Error":
+        return "Error"
+    if aux_comprobacionSimplificada(cadena[3],p3)== "Error":
+        return "Error"
+    if aux_comprobacionSimplificada(cadena[7],p4)== "Error":
+        return "Error"
+    else:
+        return "Correcto"
+
+def aux_comprobacionSimplificada(result,paridad):
+    if result != paridadPar(paridad):
+        return "Error"
+    else:
+        return "Correcto"
 
 def paridadPar(cadena):
     contador= 0
@@ -216,6 +248,14 @@ def ventana2(hilera):
             if r == 5 and c>0:
                 cell.insert(5, data[4][c-1])
                 continue
+
+    if comprobacionSimplificada(hilera) == "Error":
+        result = [data[1][12],data[2][12],data[3][12],data[4][12]]
+        aux_result = "".join(result)
+        print("------------------------")
+        print(result)
+        final = error(aux_result)
+        messagebox.showinfo("El Error", "El error se encuentra en el bit: "+ final)
     ventana3()
     root.mainloop()
 
