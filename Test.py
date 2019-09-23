@@ -66,10 +66,10 @@ def comprobacion(cadena,pruebaParidad):
 
     datosRecibidos = list(cadena) + [str(pruebaParidad)]+["_"]
     fp1=[paridadPar(p1),"_",cadena[0],"_",cadena[1],"_",cadena[3],"_",cadena[4],"_",cadena[6],"_",cadena[8],"_",cadena[10],"_",cadena[11]]+ aux_comprobacion(cadena[0],p1)
-    fp2=["_",paridadPar(p2),cadena[0],"_","_",cadena[2],cadena[3],"_","_",cadena[5],cadena[6],"_","_",cadena[9],cadena[10],"_","_"]+ aux_comprobacion(cadena[1],p1)
-    fp3=["_","_","_",paridadPar(p3),cadena[1],cadena[2],cadena[3],"_","_","_","_",cadena[7],cadena[8],cadena[9],cadena[10],"_","_"]+ aux_comprobacion(cadena[3],p1)
-    fp4=["_","_","_","_","_","_","_",paridadPar(p4),cadena[4],cadena[5],cadena[6],cadena[7],cadena[8],cadena[9],cadena[10],"_","_"]+ aux_comprobacion(cadena[7],p1)
-    fp5=["_","_","_","_","_","_","_","_","_","_","_","_","_","_","_",paridadPar(p5),cadena[11]]+ aux_comprobacion(cadena[15],p1)
+    fp2=["_",paridadPar(p2),cadena[0],"_","_",cadena[2],cadena[3],"_","_",cadena[5],cadena[6],"_","_",cadena[9],cadena[10],"_","_"]+ aux_comprobacion(cadena[1],p2)
+    fp3=["_","_","_",paridadPar(p3),cadena[1],cadena[2],cadena[3],"_","_","_","_",cadena[7],cadena[8],cadena[9],cadena[10],"_","_"]+ aux_comprobacion(cadena[3],p3)
+    fp4=["_","_","_","_","_","_","_",paridadPar(p4),cadena[4],cadena[5],cadena[6],cadena[7],cadena[8],cadena[9],cadena[10],"_","_"]+ aux_comprobacion(cadena[7],p4)
+    fp5=["_","_","_","_","_","_","_","_","_","_","_","_","_","_","_",paridadPar(p5),cadena[11]]+ aux_comprobacion(cadena[15],p5)
 
     result = [datosRecibidos,fp1,fp2,fp3,fp4,fp5]
 
@@ -117,9 +117,9 @@ def paridadPar(cadena):
             contador+=1
 
     if (contador%2 != 0):
-        return "1"
-    else:
         return "0"
+    else:
+        return "1"
 
 def paridadImpar(cadena):
     contador= 0
@@ -129,9 +129,9 @@ def paridadImpar(cadena):
             contador+=1
 
     if (contador%2 != 0):
-        return "0"
-    else:
         return "1"
+    else:
+        return "0"
 
 def ventana1(hilera):
     root = Tk()
@@ -529,9 +529,9 @@ def paridad_window():
 
     label = Label(root, fg="dark green", text= "Seleccione la paridad", font = ("Helvetica",14)).pack()
     root.geometry("500x300+600+300")
-    impar = Button(frame,text="Paridad Impar",command =lambda:{root.quit(),ventana5(get_hilera())
+    impar = Button(frame,text="Paridad Par",command =lambda:{root.quit(),ventana5(get_hilera())
                                                        }).pack(side=LEFT)
-    par = Button(frame,text="Paridad Par",command = lambda:{root.quit(),ventana1(get_hilera())}).pack(side=RIGHT)
+    par = Button(frame,text="Paridad Impar",command = lambda:{root.quit(),ventana1(get_hilera())}).pack(side=RIGHT)
 
     exit = Button(frame,text="Salir",command = lambda:root.destroy()).pack()
     e.pack()
