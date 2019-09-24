@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 
 def error(cadena):
-    p5 = int(str(cadena[4]+"0"+"0"+"0"),2)
+    p5 = int(str(cadena[4]+"0"+"0"+"0"+"0"),2)
     p4 = int(str(cadena[3]+"0"+"0"+"0"),2)
     p3 = int(str(cadena[2]+"0"+"0"),2)
     p2 = int(str(cadena[1]+"0"),2)
